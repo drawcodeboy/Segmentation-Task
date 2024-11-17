@@ -1,0 +1,5 @@
+1. pip install -r requirements/mminstall.txt # 실행하니까 mmcv 버전 안 맞다는 오류 떠서 -> 이후 train.sh 실행시키니 관련 오류는 안 뜸
+2. pip install mmcv-full==1.4.4 근데 나중에 train 시킬 때, verify 인자가 없다는 오류가 뜸 -> yapf==0.43.0 버전을 yapf==0.40.1로 낮춤
+3. config 파일 = ./local_configs/segnext/base/segnext.base.512x512.ade.160k.py 이런 형식의 파일임
+4. local_configs/segnext/tiny/segnext.tiny.512x512.ade.160k.py 해당 파일 내에 잠시 주석으로 해둔 부분이 있음.
+5. 그리고 나서 실행 시켜봤더니 Dataset 없다고 오류

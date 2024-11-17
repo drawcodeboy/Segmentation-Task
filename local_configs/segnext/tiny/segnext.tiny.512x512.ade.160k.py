@@ -11,7 +11,8 @@ find_unused_parameters = True
 model = dict(
     type='EncoderDecoder',
     backbone=dict(
-        init_cfg=dict(type='Pretrained', checkpoint='pretrained/mscan_t.pth')),
+        # init_cfg=dict(type='Pretrained', checkpoint='pretrained/mscan_t.pth')),
+        init_cfg=dict()),
     decode_head=dict(
         type='LightHamHead',
         in_channels=[64, 160, 256],
