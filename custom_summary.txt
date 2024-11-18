@@ -1,3 +1,6 @@
+[README]
+mmseg는 다루기 쉽지 않아서 다른 PyTorch repo 찾을 예정
+
 [Settings]
 0. docker/Dockerfile을 통해서 image build (이 과정에서 requirements를 설치하는 과정이 있으나, mminstall.txt(1번)이 포함되어 있지 않았음.)
 1. pip install -r requirements/mminstall.txt # 실행하니까 mmcv 버전 안 맞다는 오류 떠서 -> 이후 train.sh 실행시키니 관련 오류는 안 뜸
