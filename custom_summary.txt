@@ -1,6 +1,30 @@
+[Settings]
+0. docker/Dockerfile을 통해서 image build (이 과정에서 requirements를 설치하는 과정이 있으나, mminstall.txt(1번)이 포함되어 있지 않았음.)
 1. pip install -r requirements/mminstall.txt # 실행하니까 mmcv 버전 안 맞다는 오류 떠서 -> 이후 train.sh 실행시키니 관련 오류는 안 뜸
 2. pip install mmcv-full==1.4.4 근데 나중에 train 시킬 때, verify 인자가 없다는 오류가 뜸 -> yapf==0.43.0 버전을 yapf==0.40.1로 낮춤
-3. config 파일 = ./local_configs/segnext/base/segnext.base.512x512.ade.160k.py 이런 형식의 파일임
-4. local_configs/segnext/tiny/segnext.tiny.512x512.ade.160k.py 해당 파일 내에 잠시 주석으로 해둔 부분이 있음.
-5. 그리고 나서 실행 시켜봤더니 Dataset 없다고 오류
-6. 
+
+[ADE20K 데이터셋 관련 시도 (실패)]
+1. config 파일 = ./local_configs/segnext/base/segnext.base.512x512.ade.160k.py 이런 형식의 파일임
+2. local_configs/segnext/tiny/segnext.tiny.512x512.ade.160k.py 해당 파일 내에 잠시 주석으로 해둔 부분이 있음.
+3. 그리고 나서 실행 시켜봤더니 Dataset 없다고 오류
+4. (실패)데이터셋 다운로드 (https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/user_guides/2_dataset_prepare.md 참고)
+    [ADE20K 다운로드]
+        1. pip install -U openmim
+        2. pip install -U openxlab
+        3. OpenXLab 가입하고 Access Key, Secret Access Key 발급해야 함
+        4. openxlab login -> 이거 안 되서 그 밑에 내용은 수행 안 하고, 내가 따로 custom_tools/get_ADE20K.py 파일 만듬 (보안 이유로 argparse로 Key 값 받게 해둠)
+        5. 위 스크립트 만들 때, Dataset에서 CLI/SDK Download 참고함. (https://openxlab.org.cn/datasets/OpenDataLab/ADE20K_2016/cli/main)
+        6. python get_ADE20K.py --ak=<본인 Access Key> --sk=<본인 Secret Key> 하면, 다운받기 시작함.
+        7. 경로는 본인이 get_ADE20K.py 내에서 target_path argument에 원하는 경로 넣으면 됨.
+
+[Scoliosis Dataset]
+1. 서버에 드래그로 척추 데이터셋 옮김 data/Scoliosis
+2. 압축 해제
+    1. apt-get update (최신화)
+    2. apt-get install zip unzip
+    3. unzip data/Scoliosis/AIS.v1i.yolov8.orig.zip -d data/Scoliosis
+3. 참고 (https://velog.io/@wjddlstn0614/MMSegmentation-Custom-Dataset%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EC%9E%90)
+
+[Commands]
+# GPU 1개로 SegNeXt(Configure 파일) ADE20K 데이터셋을 학습시키는 커맨드
+./tools/dist_train.sh ./local_configs/segnext/tiny/segnext.tiny.512x512.ade.160k.py 1
