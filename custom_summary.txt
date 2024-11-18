@@ -3,3 +3,4 @@
 3. config 파일 = ./local_configs/segnext/base/segnext.base.512x512.ade.160k.py 이런 형식의 파일임
 4. local_configs/segnext/tiny/segnext.tiny.512x512.ade.160k.py 해당 파일 내에 잠시 주석으로 해둔 부분이 있음.
 5. 그리고 나서 실행 시켜봤더니 Dataset 없다고 오류
+6. 
